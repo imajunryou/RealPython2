@@ -1,20 +1,48 @@
 # ---- Flask Hello World ---- #
 
-# import the Flask class from the flask package
 from flask import Flask
 
-# create the application object
 app = Flask(__name__)
 
-# use the decorator pattern to
-# link the view function to a url
+# error handling
+app.config["DEBUG"] = True
+
+# static route
 @app.route("/")
 @app.route("/hello")
-
-# define the veiw using a function, which returns a string
 def hello_world():
-    return "Hello, World!"
+    return "Hello, World!?!?!?!?!"
 
-# start the development server using the run() method
+# dynamic route
+@app.route("/test/<search_query>")
+def search(search_query):
+    return search_query
+
+# int converter on dynamic value
+@app.route("/integer/<int:value>")
+def int_type(value):
+    print(value + 1)
+    return "correct"
+
+# float converter
+@app.route("/float/<float:value>")
+def float_type(value):
+    print(value + 1)
+    return "correct"
+
+# path converter, accepts slashes
+@app.route("/path/<path:value>")
+def path_type(value):
+    print(value)
+    return "correct"
+
+# can define message status explicitly
+@app.route("/name/<name>")
+def index(name):
+    if name.lower() == "michael":
+        return "Hello {}".format(name)
+    else:
+        return "Not Found", 404
+
 if __name__ == "__main__":
     app.run()
