@@ -26,11 +26,11 @@ with sqlite3.connect("cars.db") as conn:
     c.executemany("INSERT INTO orders VALUES (?, ?, ?)", orders)
 
     c.execute("""SELECT orders.make, orders.model, order_date, quantity
-                        FROM inventory, orders
-                        WHERE orders.make = inventory.make
-                        AND orders.model = inventory.model
-                        ORDER BY orders.make, orders.model, order_date
-                     """)
+                 FROM inventory, orders
+                 WHERE orders.make = inventory.make
+                 AND orders.model = inventory.model
+                 ORDER BY orders.make, orders.model, order_date
+                 """)
 
     rows = c.fetchall()
 
