@@ -2,4 +2,5 @@
 Work done for RealPython, part 2.
 
 - Flask: Quick Start -- *Complete*
-- Interlude: Database Programming -- **In Progress** (SQL Functions)
+- Interlude: Database Programming -- *Complete*
+- Flask: Blog App -- **In Progress** (Just begninning)
