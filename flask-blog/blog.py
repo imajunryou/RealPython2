@@ -8,11 +8,6 @@ from functools import wraps
 
 # configuration
 DATABASE = "blog.db"
-USERNAME = "admin"
-PASSWORD = "admin"
-# Generated with os.urandom(24) after importing os in an interpreter session
-SECRET_KEY = "\x81\xb4r\x0e\xeb\xfe\x9251\x90\xa8\x96\xb8\xd2\xd6\x13\xeb\x90\xb5\x81k\xedn\xcc"
-
 
 app = Flask(__name__)
 
