@@ -16,8 +16,12 @@ SECRET_KEY = "\x81\xb4r\x0e\xeb\xfe\x9251\x90\xa8\x96\xb8\xd2\xd6\x13\xeb\x90\xb
 
 app = Flask(__name__)
 
-# pulls in app configuration by looking for UPPERCASE variables
+# pulls in app configuration by looking for UPPERCASE variables in this file
 app.config.from_object(__name__)
+# Pulls in config from environment variable
+# use the following line to establish the default path for it:
+# export FLASK_BLOG_SETTINGS=settings.cfg
+app.config.from_envvar("FLASK_BLOG_SETTINGS")
 
 # function used for connecting to the database
 def connect_db():
