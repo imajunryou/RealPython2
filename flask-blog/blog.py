@@ -18,9 +18,11 @@ app.config.from_object(__name__)
 # export FLASK_BLOG_SETTINGS=settings.cfg
 app.config.from_envvar("FLASK_BLOG_SETTINGS")
 
+
 # function used for connecting to the database
 def connect_db():
     return sqlite3.connect(app.config["DATABASE"])
+
 
 # used as a decorator to require routes to have valid login credentials
 def login_required(test):
@@ -33,15 +35,15 @@ def login_required(test):
             return redirect(url_for("login"))
     return wrap
 
-# views
 
+# views
 @app.route("/", methods=["GET", "POST"])
 def login():
     error = None
     status_code = 200
     if request.method == "POST":
         if request.form["username"] != app.config["USERNAME"] or \
-            request.form["password"] != app.config["PASSWORD"]:
+           request.form["password"] != app.config["PASSWORD"]:
             error = "Invalid credentials.  Please try again."
             status_code = 401
         else:
@@ -49,11 +51,13 @@ def login():
             return redirect(url_for("main"))
     return render_template("login.html", error=error), status_code
 
+
 @app.route("/logout")
 def logout():
     session.pop("logged_in", None)
     flash("You were logged out")
     return redirect(url_for("login"))
+
 
 @app.route("/add", methods=["POST"])
 @login_required
@@ -72,6 +76,7 @@ def add():
         flash("New entry was successfully posted!")
         return redirect(url_for("main"))
 
+
 @app.route("/main")
 @login_required
 def main():
@@ -80,6 +85,7 @@ def main():
     posts = [dict(title=row[0], post=row[1]) for row in cur.fetchall()]
     g.db.close()
     return render_template("main.html", posts=posts)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
